@@ -13,6 +13,7 @@ GPIOPin::GPIOPin(const string& pin) : pin_num(pin) {
 }
 
 GPIOPin::~GPIOPin() {
+  set_value(Value::ZERO);
   unexport_pin();
 }
 
