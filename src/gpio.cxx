@@ -39,7 +39,7 @@ bool GPIOPin::unexport_pin() const {
 }
 
 bool GPIOPin::set_direction(Direction d) const { 
-  static const string direction_path = gpio_path + pin_num + "/direction";
+  static const string direction_path = gpio_path + "gpio" + pin_num + "/direction";
   string direction;
   if(d == Direction::IN) {
     direction = "in";
@@ -57,7 +57,7 @@ bool GPIOPin::set_direction(Direction d) const {
 }
 
 bool GPIOPin::set_value(Value v) const {
-  static const string value_path = gpio_path + pin_num + "/value";
+  static const string value_path = gpio_path + "gpio" + pin_num + "/value";
   string value;
   if(v == Value::ZERO) {
     value = "0";

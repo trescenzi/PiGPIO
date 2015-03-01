@@ -3,13 +3,14 @@
 #include <string>
 using namespace std;
 
+enum class Direction { IN, OUT };
+enum class Value     { ZERO, ONE};
+
 class GPIOPin {
 public:
-  enum class Direction { IN, OUT };
-  enum class Value     { ZERO, ONE};
-
   GPIOPin(const string& pin);
   ~GPIOPin();
+
   bool export_pin() const;
   bool unexport_pin() const;
   bool set_direction(Direction d) const;
