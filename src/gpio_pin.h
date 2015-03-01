@@ -16,6 +16,7 @@ public:
   bool set_direction(Direction d) const;
   bool set_value(Value v) const;
   const string& get_pin_num() const;
+  bool get_value(string& v) const;
 
 private:
   GPIOPin();

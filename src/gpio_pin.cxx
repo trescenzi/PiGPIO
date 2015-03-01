@@ -1,4 +1,4 @@
-#include "gpio.h"
+#include "gpio_pin.h"
 
 #include <fstream>
 #include <iostream>
@@ -18,7 +18,7 @@ GPIOPin::~GPIOPin() {
 }
 
 bool GPIOPin::export_pin() const {
-  static const string export_path = gpio_path + "export";
+  const string export_path = gpio_path + "export";
   ofstream export_stream(export_path.c_str());
   if(!export_stream.is_open()) {
     return false;
@@ -29,7 +29,7 @@ bool GPIOPin::export_pin() const {
 }
   
 bool GPIOPin::unexport_pin() const {
-  static const string unexport_path = gpio_path + "unexport";
+  const string unexport_path = gpio_path + "unexport";
   ofstream unexport_stream(unexport_path.c_str());
   if(!unexport_stream.is_open()) {
     return false;
@@ -40,7 +40,7 @@ bool GPIOPin::unexport_pin() const {
 }
 
 bool GPIOPin::set_direction(Direction d) const { 
-  static const string direction_path = gpio_path + "gpio" + pin_num + "/direction";
+  const string direction_path = gpio_path + "gpio" + pin_num + "/direction";
   string direction;
   if(d == Direction::IN) {
     direction = "in";
@@ -58,7 +58,7 @@ bool GPIOPin::set_direction(Direction d) const {
 }
 
 bool GPIOPin::set_value(Value v) const {
-  static const string value_path = gpio_path + "gpio" + pin_num + "/value";
+  const string value_path = gpio_path + "gpio" + pin_num + "/value";
   string value;
   if(v == Value::ZERO) {
     value = "0";
@@ -72,6 +72,16 @@ bool GPIOPin::set_value(Value v) const {
   }
   value_stream << value;
   value_stream.close();
+  return true;
+}
+
+bool GPIOPin::get_value(string& v) const {
+  const string value_path = gpio_path + "gpio" + pin_num + "/value";
+  ifstream value_stream(value_path.c_str());
+  if(!value_stream.is_open())
+   return false;
+  v.clear();
+  value_stream >> v;
   return true;
 }
 

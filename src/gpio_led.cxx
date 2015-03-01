@@ -1,4 +1,4 @@
-#include "gpio.h"
+#include "gpio_pin.h"
 #include "gpio_led.h"
 #include <chrono>
 #include <string>
@@ -6,7 +6,9 @@
 
 using namespace std;
 
-GPIOSimpleLed::GPIOSimpleLed(string power_pin_num) : power_pin(power_pin_num) {}
+GPIOSimpleLed::GPIOSimpleLed(string power_pin_num) : power_pin(power_pin_num) { 
+  power_pin.set_direction(Direction::OUT);
+}
 GPIOSimpleLed::~GPIOSimpleLed() {}
 
 bool GPIOSimpleLed::on() const {
